@@ -23,7 +23,7 @@ public class LoginTests {
         // _driver.close();
         _driver.quit();
     }
-    @Test(priority = 0,invocationCount = 1, dataProvider = "logindata")
+    @Test(priority = 0,invocationCount = 1, dataProvider = "invaliddata")
     public void invalidUsernameLogin(String username, String password) {
 
         Loginpage loginpage = new Loginpage(_driver);
@@ -32,7 +32,7 @@ public class LoginTests {
         loginpage.clickOnLoginIn();
     }
 
-    @Test(priority = 2,dataProvider = "logindata")
+    @Test(priority = 2,dataProvider = "invaliddata")
     public void invalidPasswordLogin(String username, String password) {
 
         Loginpage loginpage = new Loginpage(_driver);
@@ -41,7 +41,7 @@ public class LoginTests {
         loginpage.clickOnLoginIn();
 
     }
-    @Test(priority = 3,dependsOnMethods = "invalidPasswordLogin",dataProvider = "logindata")
+    @Test(priority = 3,dependsOnMethods = "invalidPasswordLogin",dataProvider = "invaliddata")
     public void invalidUsernamePasswordLogin(String username, String password) {
 
         Loginpage loginpage = new Loginpage(_driver);
@@ -61,13 +61,13 @@ public class LoginTests {
         loginpage.clickOnLoginIn();
     }
 
-    @DataProvider(name = "logindata")
+    @DataProvider(name = "invaliddata")
     public Object[][] invalidDetails() {
         return new Object[][]{{"mouni","jjd"},{"tester1","Test@1231"},{"tester","Test@12"}};
        /* Object[][] credentials = new Object[5][2];
         //incorrect login/short login
         credentials[0][0] = "testss";
-        credentials[0][1] = "testss";
+        credentials[0][1] = "testss";logindata
         //empty login
         credentials[1][0] = "";
         credentials[1][1] = "emptylogin";

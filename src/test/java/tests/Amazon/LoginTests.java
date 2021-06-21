@@ -12,22 +12,20 @@ import java.sql.SQLOutput;
 
 public class LoginTests {
     private WebDriver _driver;
-
     @BeforeClass
     public void lunchBrowser() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
         _driver = new ChromeDriver();
+        _driver.get("http://bgvm.eastus.cloudapp.azure.com:4028/BankGenie/Login/Loginpage.aspx");
     }
-
     @AfterClass
     public void closeBrowser() {
         // _driver.close();
         _driver.quit();
     }
-
     @Test(priority = 0,invocationCount = 1, dataProvider = "logindata")
     public void invalidUsernameLogin(String username, String password) {
-        _driver.get("http://bgvm.eastus.cloudapp.azure.com:4028/BankGenie/Login/Loginpage.aspx");
+
         Loginpage loginpage = new Loginpage(_driver);
         loginpage.enterUsername(username);
         loginpage.enterPwd(password);
@@ -36,30 +34,27 @@ public class LoginTests {
 
     @Test(priority = 2,dataProvider = "logindata")
     public void invalidPasswordLogin(String username, String password) {
-        _driver.get("http://bgvm.eastus.cloudapp.azure.com:4028/BankGenie/Login/Loginpage.aspx");
+
         Loginpage loginpage = new Loginpage(_driver);
         loginpage.enterUsername(username);
         loginpage.enterPwd(password);
         loginpage.clickOnLoginIn();
 
     }
-
     @Test(priority = 3,dependsOnMethods = "invalidPasswordLogin",dataProvider = "logindata")
     public void invalidUsernamePasswordLogin(String username, String password) {
-        _driver.get("http://bgvm.eastus.cloudapp.azure.com:4028/BankGenie/Login/Loginpage.aspx");
+
         Loginpage loginpage = new Loginpage(_driver);
         loginpage.enterUsername(username);
         loginpage.enterPwd(password);
         loginpage.clickOnLoginIn();
-
     }
-
     // @Parameters({"username","password"})
     @Test(priority = 4, dataProvider = "ValidLogindetails")
 
     //(priority = 0,dependsOnMethods = {"invalidUsernamePasswordLogin"},invocationCount = 5)
     public void validLogin(String username, String password) {
-        _driver.get("http://bgvm.eastus.cloudapp.azure.com:4028/BankGenie/Login/Loginpage.aspx");
+
         Loginpage loginpage = new Loginpage(_driver);
         loginpage.enterUsername(username);
         loginpage.enterPwd(password);

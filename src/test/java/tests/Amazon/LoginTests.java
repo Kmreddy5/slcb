@@ -32,7 +32,7 @@ public class LoginTests {
         loginpage.clickOnLoginIn();
     }
 
-    @Test(priority = 2,dataProvider = "invaliddata")
+    @Test(priority = 3,dataProvider = "invaliddata")
     public void invalidPasswordLogin(String username, String password) {
 
         Loginpage loginpage = new Loginpage(_driver);
@@ -41,7 +41,7 @@ public class LoginTests {
         loginpage.clickOnLoginIn();
 
     }
-    @Test(priority = 3,dependsOnMethods = "invalidPasswordLogin",dataProvider = "invaliddata")
+    @Test(priority = 2,dependsOnMethods = "invalidPasswordLogin",dataProvider = "invaliddata")
     public void invalidUsernamePasswordLogin(String username, String password) {
 
         Loginpage loginpage = new Loginpage(_driver);
@@ -60,7 +60,6 @@ public class LoginTests {
         loginpage.enterPwd(password);
         loginpage.clickOnLoginIn();
     }
-
     @DataProvider(name = "invaliddata")
     public Object[][] invalidDetails() {
         return new Object[][]{{"mouni","jjd"},{"tester1","Test@1231"},{"tester","Test@12"}};
